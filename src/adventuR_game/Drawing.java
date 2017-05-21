@@ -87,38 +87,38 @@ public class Drawing extends GameApplet{
 	@Override
 	public void handleCollisions() {
 		// Sarh's Collision with obstacles
-		for(int i= 0; i<obs.length;i++){
-			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())){
-				//System.out.println("Collision");
+		for (int i = 0; i < obs.length; i++) {
+			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())) {
+				// System.out.println("Collision");
 				s.Sarah_Health = 0;
 				s.die();
 			}
 		}
-		//Sarah's Collision with monster
-		if (s.hasCollidedWith(m) && m.isAlive==true){
+		// Sarah's Collision with monster
+		if (s.hasCollidedWith(m) && m.isAlive == true) {
 			s.Sarah_Health = 0;
 			s.die();
 		}
-		//Monster's collision with bullets
-        for (int j = 0;j<shoot.size();j++){
-			if (m.hasCollidedWith(shoot.get(j).getBounds()) && shoot.get(j).isActive==true){
+		// Monster's collision with bullets
+		for (int j = 0; j < shoot.size(); j++) {
+			if (m.hasCollidedWith(shoot.get(j).getBounds()) && shoot.get(j).isActive == true) {
 				m.hit();
-				if(m.health>=1){	
-					shoot.get(j).isActive=false;
-				}else{
+				if (m.health >= 1) {
+					shoot.get(j).isActive = false;
+				} else {
 					m.isAlive = false;
 				}
 			}
 		}
-        
-        //bullet's with obstacles
-        for(int k = 0; k<shoot.size();k++){
-	        for(int i= 0; i<obs.length;i++){
-				if (shoot.get(k).hasCollidedWith(obs[i].ObstaclesgetBounds())){	
-					shoot.get(k).isActive=false;
+
+		// bullet's with obstacles
+		for (int k = 0; k < shoot.size(); k++) {
+			for (int i = 0; i < obs.length; i++) {
+				if (shoot.get(k).hasCollidedWith(obs[i].ObstaclesgetBounds())) {
+					shoot.get(k).isActive = false;
 				}
-	        }
-        }
+			}
+		}
 	}
 	
 	public void paint(Graphics g) {
