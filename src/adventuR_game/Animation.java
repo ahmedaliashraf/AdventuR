@@ -1,5 +1,4 @@
 package adventuR_game;
-
 import java.awt.*;
 
 
@@ -29,7 +28,7 @@ public class Animation
    }
   
 
-   public Image nextImage()
+   public  Image nextImage()
    {
       countdown--;
 
@@ -39,7 +38,7 @@ public class Animation
 
          current++;
 
-         if(current == image.length)   current = 1;
+         if(current == image.length)   current = 0;
       }
 
 
@@ -51,7 +50,7 @@ public class Animation
    }
 
 
-   public Image staticImage()
+   public  Image staticImage()
    {
       return image[0];
    }

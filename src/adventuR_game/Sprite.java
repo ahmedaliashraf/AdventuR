@@ -53,7 +53,7 @@ public class Sprite extends Rect
    {
 	  
 	   
-	   
+	   g.drawRect(x, y, w, h);
 	   g.drawImage(animation[action].nextImage(),x,y, null);
 	   
 	   action = IDLE;
@@ -68,7 +68,7 @@ public class Sprite extends Rect
 //	g.drawImage(animation[action].nextImage(),x,y,100,100,Color.WHITE,null);
 	
 //	   g.drawImage(animation[action].nextImage(), x, y, null);
-      g.drawRect(x, y, w, h);
+//      g.drawRect(x, y, w, h);
    }
 
 }

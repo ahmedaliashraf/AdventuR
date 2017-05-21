@@ -115,6 +115,7 @@ public abstract class GameApplet extends Applet implements KeyListener, Runnable
 
 
       // Aquire the focus for the Applet so keypresses are accepted
+      setFocusable(true);
       requestFocus();
 
       // Attach the KeyListener to the Applet in order to monitor keypresses
@@ -200,10 +201,13 @@ public abstract class GameApplet extends Applet implements KeyListener, Runnable
 
    //-------------------------------------------------------------------------//
 
-   public final void keyReleased(KeyEvent e)
+   public  void keyReleased(KeyEvent e)  //final removed
    {
       int code = e.getKeyCode();
+ 
+   
       input[code] = false;
+
    }
 
    //-------------------------------------------------------------------------//

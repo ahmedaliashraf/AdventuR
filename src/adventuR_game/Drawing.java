@@ -1,12 +1,17 @@
 package adventuR_game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+import java.util.Vector;
 
 
 public class Drawing extends GameApplet{
 	
-	Sarah s = new Sarah(550,475);
+	Sarah s = new Sarah(0,475);
+	Sound jumpSound;
 	Monsters m = new Monsters(2000,475);
 //	Obstacles o = new Obstacles(975, 475);
 	public int counter = 0;
@@ -18,20 +23,26 @@ public class Drawing extends GameApplet{
 	ImageLayer layer2 = new ImageLayer("backgroundLayers/layer2.png", 0, 0, 1, 1365, 50);
 	ImageLayer layer1 = new ImageLayer("backgroundLayers/layer1.png", 0, -200, 1, 1365, 50);
 	
-	int[] lv1_obs = {-1, 0, -1, 1, 1, 0, -1, -1};
-	Level lv1 = new Level(0, 1, lv1_obs);
+	public Vector<Bullet> shoot;
+	Random rand = new Random();
 	
-	int[] lv2_obs = {-1, 0, -1, -1, 1, -1, 2, -1};
-	Level lv2 = new Level(2048, 1, lv1_obs);
+	//LevelBuilder levels = new LevelBuilder();
 	
-	Level currentLevel = lv1;
-	Level nextLevel = lv1;
-	
+	Obstacles[] obs = new Obstacles[1000];
 
 	@Override
 	public void initialize() {
 		// TODO Auto-generated method stub
+		shoot = new Vector<Bullet>();
 		
+		int last_loc = 0;
+		for (int i = 0; i < obs.length; i++) {
+			int pos = last_loc + rand.nextInt(1024);
+			obs[i] = new Obstacles(pos, 475, rand.nextInt(3));
+			last_loc = pos;
+		}
+		
+		jumpSound = new Sound("sounds/s.jump.wav");
 	}
 
 	@Override
@@ -39,10 +50,10 @@ public class Drawing extends GameApplet{
 		// TODO Auto-generated method stub
 	    if(input[RT]) { 
 	    	s.run();
-	    	Camera2D.moveRightBy(8);
+	    	Camera2D.moveRightBy(20);
 	    }
 	    if (input[SP]){
-	    	s.shoot();
+	    	s.shoot(shoot);
 	    }
 	    if (input[_Z]){
 	    	s.melee();
@@ -50,22 +61,61 @@ public class Drawing extends GameApplet{
 	    if (input[_X]){
 	    	s.slide();
 	    }
-	    if (input[_K]){
+	    if (input[_C]){
+	    	
 	    	s.jump();
+	    	 
+	    
+//	    	input[_K] = false;
 //	    	s.update();
+
 	    }
 	    
 	}
+		@Override
+	   public  void keyReleased(KeyEvent e)
+	   {
+	      int code = e.getKeyCode();
+	      if(code == _C){
+	    	  Sarah.isOnTheGround = true;
+	    	  jumpSound.play();
+//	    	  if((Sarah.isOnTheGround)){
+//	    		  input[code] = true;
+//	    	  }
+//	    	  else {
+//	    		  input[code] = false;
+//	    	  }
+	      }
+	      else{
+	      input[code] = false;
+	      }
+	      
+	      //
+	   }
 
 	@Override
 	public void moveGameObjects() {
 		s.update();
 		m.walk_left(9);
+		//Camera2D.moveRightBy(10);
+	
+		for(int i =0; i< shoot.size(); i++){
+			shoot.get(i).update();
+		}
 	}
 
 	@Override
 	public void handleCollisions() {
 		// TODO Auto-generated method stub
+
+
+		for(int i= 0; i<obs.length;i++){
+			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())){
+				//System.out.println("Collision");
+				s.die();
+			}
+		}
+		
 		
 	}
 	
@@ -77,16 +127,23 @@ public class Drawing extends GameApplet{
 		layer3.draw(g);
 		layer2.draw(g);
 		layer1.draw(g);
-		g.setColor(Color.WHITE);
+		for (int i=0;i<obs.length;i++){
+			obs[i].draw(g);
+		}
+		g.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
+		g.setColor(Color.RED);
 		g.drawString(s.getHealth(), 5, 15);
+		for (int i = 0; i< shoot.size();i++){
+			shoot.get(i).draw(g);
+		}
 		
-		nextLevel.draw(g);
+		//levels.drawLevels(g);
 		
 		//o.draw(g);
 		s.draw(g);
 		m.draw(g);
-		
 		//g.drawImage(image, 100, 100, null);
 	}
+	
 
 }
