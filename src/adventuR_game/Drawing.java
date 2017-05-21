@@ -14,8 +14,8 @@ public class Drawing extends GameApplet{
 	Sarah s = new Sarah(0,475);
 	Sound jumpSound;
 	Monsters m = new Monsters(2000,475);
-//	Obstacles o = new Obstacles(975, 475);
 	public int counter = 0;
+	
 	ImageLayer layer7 = new ImageLayer("backgroundLayers/layer7.png", 0, 0, 2147483647, 1365, 1);
 	ImageLayer layer6 = new ImageLayer("backgroundLayers/layer6.png", 0, 0, 2147483640, 1365, 1);
 	ImageLayer layer5 = new ImageLayer("backgroundLayers/layer5.png", 0, 0, 4, 1365, 50);
@@ -52,31 +52,28 @@ public class Drawing extends GameApplet{
 	    }
 	    
 	}
-		@Override
-	   public  void keyReleased(KeyEvent e)
-	   {
-	      int code = e.getKeyCode();
-	      if(code == UP){
-	    	  Sarah.isOnTheGround = true;
-	    	  jumpSound.play();
-//	    	  if((Sarah.isOnTheGround)){
-//	    		  input[code] = true;
-//	    	  }
-//	    	  else {
-//	    		  input[code] = false;
-//	    	  }
-	      }
-	      else{
-	      input[code] = false;
-	      }
-	      
-	      //
-	   }
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int code = e.getKeyCode();
+		if (code == UP) {
+			Sarah.isOnTheGround = true;
+			jumpSound.play();
+			// if((Sarah.isOnTheGround)){
+			// input[code] = true;
+			// }
+			// else {
+			// input[code] = false;
+			// }
+		} else {
+			input[code] = false;
+		}
+	}
 
 	@Override
 	public void moveGameObjects() {
 		s.update();
-		m.walk_left(9);
+		m.walk_left(5);
 		//Camera2D.moveRightBy(10);
 	
 		for(int i =0; i< shoot.size(); i++){
@@ -89,7 +86,6 @@ public class Drawing extends GameApplet{
 		// Sarh's Collision with obstacles
 		for (int i = 0; i < obs.length; i++) {
 			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())) {
-				// System.out.println("Collision");
 				s.Sarah_Health = 0;
 				s.die();
 			}
@@ -119,6 +115,19 @@ public class Drawing extends GameApplet{
 				}
 			}
 		}
+		// monster with obstacles
+		for (int i = 0; i < obs.length; i++) {
+			if(m.hasCollidedWith(obs[i].ObstaclesgetBounds())){
+//				m.moveUpBy(obs[i].getHeight());
+//				m.moveLeftBy(obs[i].getWidth());
+//				m.moveDnBy(obs[i].getHeight());
+//tried so it clims up, but not working
+//				if (475-obs[i].getHeight()+2!=m.y) m.moveUpBy(1);
+//				if (obs[i].getX()-2!=m.x)	m.moveLeftBy(1);
+//				if (m.y<475)	m.moveDnBy(1);
+//				if(m.y>= 475) m.moving = true;
+			}
+		}
 	}
 	
 	public void paint(Graphics g) {
@@ -141,7 +150,6 @@ public class Drawing extends GameApplet{
 		
 		//levels.drawLevels(g);
 		
-		//o.draw(g);
 		s.draw(g);
 		if (m.isAlive){
 			m.draw(g);

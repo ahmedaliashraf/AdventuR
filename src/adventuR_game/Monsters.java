@@ -20,6 +20,14 @@ public class Monsters extends Sprite{
 		moving = true;
 	}
 	
+	public void moveUpBy(int dy){
+		y -= dy;
+	}
+	
+	public void moveDnBy(int dy){
+		y += dy;
+	}	
+	
 	public void hit(){
 		health -= 10;
 	}

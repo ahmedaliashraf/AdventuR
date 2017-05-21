@@ -1,10 +1,5 @@
 package adventuR_game;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.util.Vector;
-
-import org.omg.IOP.Codec;
 
 public class Sarah extends Sprite{
 	   public static final int RUN = 1;
@@ -63,17 +58,12 @@ public class Sarah extends Sprite{
 		    if (input[GameApplet._X]){
 		    	slide();
 		    }
-		    if (input[GameApplet.UP]){
-		    	
+		    if (input[GameApplet.UP]){	
 		    	jump();
-		    	 
-		    
+		   
 //		    	input[_K] = false;
 //		    	s.update();
-
 		    }
-		    
-		   
 	   }
 	   
 	   public void update() {
