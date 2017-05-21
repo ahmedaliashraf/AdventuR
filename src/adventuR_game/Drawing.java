@@ -25,7 +25,6 @@ public class Drawing extends GameApplet{
 	ImageLayer layer1 = new ImageLayer("backgroundLayers/layer1.png", 0, -200, 1, 1365, 50);
 	
 	public Vector<Bullet> shoot;
-	Iterator<Bullet> itr;
 	Random rand = new Random();
 	
 	//LevelBuilder levels = new LevelBuilder();
@@ -34,7 +33,6 @@ public class Drawing extends GameApplet{
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
 		shoot = new Vector<Bullet>();
 		int last_loc = 0;
 		for (int i = 0; i < obs.length; i++) {
@@ -102,22 +100,25 @@ public class Drawing extends GameApplet{
 			s.die();
 		}
 		//Monster's collision with bullets
-		itr = shoot.iterator();
-		int j = 0;
-        while(itr.hasNext()){
-			if (m.hasCollidedWith(itr.next().getBounds()) && shoot.get(j).isActive==true){
-				//System.out.println("Collision");
+        for (int j = 0;j<shoot.size();j++){
+			if (m.hasCollidedWith(shoot.get(j).getBounds()) && shoot.get(j).isActive==true){
 				m.hit();
 				if(m.health>=1){	
 					shoot.get(j).isActive=false;
 				}else{
 					m.isAlive = false;
 				}
-				//shoot.remove(j);
 			}
-			j++;
-		}		
-		
+		}
+        
+        //bullet's with obstacles
+        for(int k = 0; k<shoot.size();k++){
+	        for(int i= 0; i<obs.length;i++){
+				if (shoot.get(k).hasCollidedWith(obs[i].ObstaclesgetBounds())){	
+					shoot.get(k).isActive=false;
+				}
+	        }
+        }
 	}
 	
 	public void paint(Graphics g) {

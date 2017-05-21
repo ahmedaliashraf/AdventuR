@@ -42,5 +42,8 @@ public class Bullet {
 		if(isActive)	g.drawImage(img,x,y,null);
 	}
 	
-	
+	public boolean hasCollidedWith(Rect r)
+	{
+		return ((r.x <= x+imageWidth) && (r.x+r.w >= x) && (r.y+r.h >= y) && (r.y <= y+imageHeight));
+	}
 }
