@@ -118,9 +118,9 @@ public class Drawing extends GameApplet{
 		// monster with obstacles
 		for (int i = 0; i < obs.length; i++) {
 			if(m.hasCollidedWith(obs[i].ObstaclesgetBounds())){
-//				m.moveUpBy(obs[i].getHeight());
-//				m.moveLeftBy(obs[i].getWidth());
-//				m.moveDnBy(obs[i].getHeight());
+				m.moveUpBy(obs[i].getHeight());
+				m.moveLeftBy(obs[i].getWidth());
+				m.moveDnBy(obs[i].getHeight());
 //tried so it clims up, but not working
 //				if (475-obs[i].getHeight()+2!=m.y) m.moveUpBy(1);
 //				if (obs[i].getX()-2!=m.x)	m.moveLeftBy(1);
