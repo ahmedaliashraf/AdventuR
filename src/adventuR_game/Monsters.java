@@ -4,6 +4,7 @@ public class Monsters extends Sprite{
 	
 	public static final int WALK = 0;
 	public int health = 100;
+	public boolean isAlive = true;
 	
 	private static final String[] actions = {"walks"};
 	

@@ -12,6 +12,8 @@ public class Bullet {
 	public Image img;
 	public int imageHeight;
 	public int imageWidth;
+	public boolean isActive = true;
+	
 	public Bullet(int x, int y){
 		this.x = x;
 		this.y = y;
@@ -37,7 +39,7 @@ public class Bullet {
 	
 	public void draw(Graphics g){
 		g.setColor(Color.ORANGE);
-		g.drawImage(img,x,y,null);
+		if(isActive)	g.drawImage(img,x,y,null);
 	}
 	
 	

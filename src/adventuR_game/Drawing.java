@@ -97,7 +97,7 @@ public class Drawing extends GameApplet{
 			}
 		}
 		//Sarah's Collision with monster
-		if (s.hasCollidedWith(m)){
+		if (s.hasCollidedWith(m) && m.isAlive==true){
 			s.Sarah_Health = 0;
 			s.die();
 		}
@@ -105,9 +105,14 @@ public class Drawing extends GameApplet{
 		itr = shoot.iterator();
 		int j = 0;
         while(itr.hasNext()){
-			if (m.hasCollidedWith(itr.next().getBounds())){
+			if (m.hasCollidedWith(itr.next().getBounds()) && shoot.get(j).isActive==true){
 				//System.out.println("Collision");
 				m.hit();
+				if(m.health>=1){	
+					shoot.get(j).isActive=false;
+				}else{
+					m.isAlive = false;
+				}
 				//shoot.remove(j);
 			}
 			j++;
@@ -137,7 +142,7 @@ public class Drawing extends GameApplet{
 		
 		//o.draw(g);
 		s.draw(g);
-		if (m.health>=1){
+		if (m.isAlive){
 			m.draw(g);
 		}
 		//g.drawImage(image, 100, 100, null);
