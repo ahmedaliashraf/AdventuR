@@ -27,13 +27,14 @@ public class Bullet {
 	public void update(){
 		x += 5;
 	}
-	public Rectangle getBounds(){
-		return new Rectangle(x,y,imageWidth, imageHeight);
+	public Rect getBounds(){
+		return new Rect(x,y,imageWidth, imageHeight);
 	}
 	
 	public int getY(){
 		return y;
 	}
+	
 	public void draw(Graphics g){
 		g.setColor(Color.ORANGE);
 		g.drawImage(img,x,y,null);

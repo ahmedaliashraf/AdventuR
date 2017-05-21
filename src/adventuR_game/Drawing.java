@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
@@ -24,6 +25,7 @@ public class Drawing extends GameApplet{
 	ImageLayer layer1 = new ImageLayer("backgroundLayers/layer1.png", 0, -200, 1, 1365, 50);
 	
 	public Vector<Bullet> shoot;
+	Iterator<Bullet> itr;
 	Random rand = new Random();
 	
 	//LevelBuilder levels = new LevelBuilder();
@@ -34,7 +36,6 @@ public class Drawing extends GameApplet{
 	public void initialize() {
 		// TODO Auto-generated method stub
 		shoot = new Vector<Bullet>();
-		
 		int last_loc = 0;
 		for (int i = 0; i < obs.length; i++) {
 			int pos = last_loc + rand.nextInt(1024);
@@ -47,28 +48,9 @@ public class Drawing extends GameApplet{
 
 	@Override
 	public void respondToInput() {
-		// TODO Auto-generated method stub
-	    if(input[RT]) { 
-	    	s.run();
-	    	Camera2D.moveRightBy(20);
-	    }
+		s.respondToInput(input);
 	    if (input[SP]){
 	    	s.shoot(shoot);
-	    }
-	    if (input[_Z]){
-	    	s.melee();
-	    }
-	    if (input[_X]){
-	    	s.slide();
-	    }
-	    if (input[_C]){
-	    	
-	    	s.jump();
-	    	 
-	    
-//	    	input[_K] = false;
-//	    	s.update();
-
 	    }
 	    
 	}
@@ -76,7 +58,7 @@ public class Drawing extends GameApplet{
 	   public  void keyReleased(KeyEvent e)
 	   {
 	      int code = e.getKeyCode();
-	      if(code == _C){
+	      if(code == UP){
 	    	  Sarah.isOnTheGround = true;
 	    	  jumpSound.play();
 //	    	  if((Sarah.isOnTheGround)){
@@ -106,16 +88,30 @@ public class Drawing extends GameApplet{
 
 	@Override
 	public void handleCollisions() {
-		// TODO Auto-generated method stub
-
-
+		// Sarh's Collision with obstacles
 		for(int i= 0; i<obs.length;i++){
 			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())){
 				//System.out.println("Collision");
+				s.Sarah_Health = 0;
 				s.die();
 			}
 		}
-		
+		//Sarah's Collision with monster
+		if (s.hasCollidedWith(m)){
+			s.Sarah_Health = 0;
+			s.die();
+		}
+		//Monster's collision with bullets
+		itr = shoot.iterator();
+		int j = 0;
+        while(itr.hasNext()){
+			if (m.hasCollidedWith(itr.next().getBounds())){
+				//System.out.println("Collision");
+				m.hit();
+				//shoot.remove(j);
+			}
+			j++;
+		}		
 		
 	}
 	
@@ -141,7 +137,9 @@ public class Drawing extends GameApplet{
 		
 		//o.draw(g);
 		s.draw(g);
-		m.draw(g);
+		if (m.health>=1){
+			m.draw(g);
+		}
 		//g.drawImage(image, 100, 100, null);
 	}
 	

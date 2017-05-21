@@ -51,14 +51,28 @@ public class Sarah extends Sprite{
 		   return (int)Camera2D.x + x; 
 	   }
 	   
-	   public void respondToInput(boolean[] inputIs){
+	   public void respondToInput(boolean[] input){
 //		   if (inputIs[GameApplet.RT]) run(4);
-//		   if (inputIs[GameApplet._C]) jump(30);
-//		   if (inputIs[GameApplet.SP]) shoot();
-//		   if (inputIs[GameApplet._Z]) melee();
-//		   if (inputIs[GameApplet._X]) slide();
-//		   if (inputIs[GameApplet.DN]) melee();
-		   
+		   if(input[GameApplet.RT]) { 
+			   run();
+		    	Camera2D.moveRightBy(20);
+		    }
+		    if (input[GameApplet._Z]){
+		    	melee();
+		    }
+		    if (input[GameApplet._X]){
+		    	slide();
+		    }
+		    if (input[GameApplet.UP]){
+		    	
+		    	jump();
+		    	 
+		    
+//		    	input[_K] = false;
+//		    	s.update();
+
+		    }
+		    
 		   
 	   }
 	   
@@ -82,6 +96,7 @@ public class Sarah extends Sprite{
 //				   isOnTheGround = true;
 			   }
 		   }
+		   
 		  
 //		   if (action == JUMP){
 //			   x += .5;

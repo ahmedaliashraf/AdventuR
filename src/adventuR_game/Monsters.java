@@ -3,7 +3,7 @@ package adventuR_game;
 public class Monsters extends Sprite{
 	
 	public static final int WALK = 0;
-	
+	public int health = 100;
 	
 	private static final String[] actions = {"walks"};
 	
@@ -19,5 +19,7 @@ public class Monsters extends Sprite{
 		moving = true;
 	}
 	
-
+	public void hit(){
+		health -= 10;
+	}
 }
