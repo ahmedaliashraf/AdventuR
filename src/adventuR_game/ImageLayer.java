@@ -35,7 +35,7 @@ public class ImageLayer
 
    public void draw(Graphics g)
    {
-      for(int i = 0; i < count; i++)
+      for(int i = 0; i < 1000; i++)
 
          g.drawImage(image, (int)(x - Camera2D.x/z) + w*i, (int)(y - Camera2D.y), null);
    }

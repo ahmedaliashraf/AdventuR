@@ -18,7 +18,7 @@ public class Level {
 		count = 0;
 		for (int i = 0; i < 8; i++) {
 			if (obs[i] != -1) {
-				obstacles[count] = new Obstacles(start + i * 256, 475, obs[i]);
+				obstacles[count] = new Obstacles(start + i * 512, 475, obs[i]);
 				count++;
 			}
 		}
@@ -29,8 +29,26 @@ public class Level {
 			obstacles[i].draw(g);
 	}
 	
-	public boolean inThisLevel(int pos) {
-		return pos < (start + 2048);
+	public boolean contains(int pos) {
+		return start > pos && pos <= (start + 4096);
 	}
+
+//	public boolean detectCollision(Sarah s) {
+//		for  (int i = 0; i < 8; i++) {
+//		if (obstacles[i].collidedWith(s)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
+//	public boolean detectCollision(Sarah s) {
+//		for  (int i = 0; i < 8; i++) {
+//			if (obstacles[i].collidedWith(s)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 	
 }
