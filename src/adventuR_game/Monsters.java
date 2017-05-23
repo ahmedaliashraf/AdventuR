@@ -20,6 +20,10 @@ public class Monsters extends Sprite{
 		moving = true;
 	}
 	
+	public void walk_right(int dx){
+		x += dx;
+	}
+	
 	public void moveUpBy(int dy){
 		y -= dy;
 	}
@@ -30,5 +34,10 @@ public class Monsters extends Sprite{
 	
 	public void hit(){
 		health -= 10;
+	}
+	
+	public void chase(Sarah s){
+		if (s.x<=this.x)	walk_left(5);
+		if (s.x>this.x)		walk_right(5);
 	}
 }
