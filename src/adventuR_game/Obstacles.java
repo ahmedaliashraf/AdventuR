@@ -36,6 +36,16 @@ public class Obstacles{
 		this.y = y;
 		
 	}
+	public int getHeight(){
+		return 85;
+	}
+	public int getWidth(){
+		return 80;
+	}
+	public int getX(){
+		return x-(int)Camera2D.x;
+	}
+	
 	public Rect ObstaclesgetBounds(){
 		//return new Rectangle(x,y, 80, 85);
 		return new Rect(x-(int)Camera2D.x,y, 80, 85);
@@ -44,6 +54,7 @@ public class Obstacles{
 		g.drawRect(x-(int)Camera2D.x, y, 80, 85);
 	   g.drawImage(images[type], this.x - (int)Camera2D.x, y, null);
 	}
+
 	
 //	public boolean collidedWith(Sarah s) {
 //		System.out.println("jklala");
