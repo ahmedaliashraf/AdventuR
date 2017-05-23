@@ -1,61 +1,51 @@
 package adventuR_game;
+
 import java.awt.*;
 
+public class Animation {
+	private Image[] image;
 
-public class Animation
-{
-   private Image[] image;
+	private int current = 0;
 
-   private int current = 0;
+	private int duration;
+	private int countdown;
 
-   private int duration;
-   private int countdown;
+	public Animation(String name, int count, int duration) {
+		image = new Image[count];
 
+		for (int i = 0; i < count; i++)
 
+			image[i] = Toolkit.getDefaultToolkit().getImage(name + i + ".png");
 
-   public Animation(String name, int count, int duration)
-   {
-      image = new Image[count];
+		this.duration = duration;
 
-      for(int i = 0; i < count; i++)
+		countdown = duration;
+	}
 
-         image[i] = Toolkit.getDefaultToolkit().getImage(name + i + ".png");
-      
+	public Image nextImage() {
+		countdown--;
 
-      this.duration = duration;
+		if (countdown == 0) {
+			countdown = duration;
 
-      countdown = duration;
-   }
-  
+			current++;
 
-   public  Image nextImage()
-   {
-      countdown--;
+			if (current == image.length)
+				current = 0;
+		}
 
-      if(countdown == 0)
-      {
-         countdown = duration;
+		return image[current];
+	}
 
-         current++;
+	public void reset() {
+		current = 0;
+	}
 
-         if(current == image.length)   current = 0;
-      }
+	public Image staticImage() {
+		return image[0];
+	}
 
-
-      return image[current];
-   }
-   
-   public void reset() {
-	   current = 0;
-   }
-
-
-   public  Image staticImage()
-   {
-      return image[0];
-   }
-   
-   public boolean finished() {
-	   return current == image.length;
-   }
+	public boolean finished() {
+		return current == image.length;
+	}
 }

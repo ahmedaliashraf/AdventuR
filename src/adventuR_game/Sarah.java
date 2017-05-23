@@ -11,7 +11,7 @@ public class Sarah extends Sprite {
 	public static final int DEAD = 6;
 	public int Sarah_Health = 100;
 	public int score = 0;
-	
+
 	public static boolean isOnTheGround = true;
 
 	// Image [] shoot = {img1, img2};
@@ -132,8 +132,8 @@ public class Sarah extends Sprite {
 	public String getHealth() {
 		return Integer.toString(Sarah_Health);
 	}
-	
-	public String getScore(){
+
+	public String getScore() {
 		return Integer.toString(score);
 	}
 
