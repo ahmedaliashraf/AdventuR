@@ -51,7 +51,7 @@ public class Obstacles {
 	}
 
 	public void draw(Graphics g) {
-		g.drawRect(x - (int) Camera2D.x, y, 80, 85);
+		//g.drawRect(x - (int) Camera2D.x, y, 80, 85);
 		g.drawImage(images[type], this.x - (int) Camera2D.x, y, null);
 	}
 

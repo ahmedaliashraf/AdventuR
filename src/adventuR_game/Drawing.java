@@ -96,6 +96,7 @@ public class Drawing extends GameApplet {
 			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())) {
 				s.Sarah_Health = 0;
 				s.die();
+				paused=true;//pauses game loop
 			}
 		}
 		// Sarah's Collision with monster
@@ -104,6 +105,7 @@ public class Drawing extends GameApplet {
 				if (s.hasCollidedWith(monsters[i])) {// && m.isAlive == true
 					s.Sarah_Health = 0;
 					s.die();
+					paused=true;//pauses game loop
 				}
 			}
 		}
@@ -169,6 +171,8 @@ public class Drawing extends GameApplet {
 		g.setColor(Color.RED);
 		g.drawString("HP: " + s.getHealth(), 5, 15);
 		g.drawString("Score: " + s.getScore(), 5, 30);
+		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 100));
+
 		for (int i = 0; i < shoot.size(); i++) {
 			shoot.get(i).draw(g);
 		}
@@ -181,7 +185,10 @@ public class Drawing extends GameApplet {
 				monsters[j].draw(g);
 			}
 		}
-
+		
+		if(s.Sarah_Health==0){
+			g.drawString("Game Over", 500, 500);
+		}
 		// g.drawImage(image, 100, 100, null);
 	}
 
