@@ -123,6 +123,7 @@ public class Sarah extends Sprite {
 		// this might change later to reflect the image.
 		action = DEAD;
 		moving = false;
+		
 	}
 
 	public void hit() {

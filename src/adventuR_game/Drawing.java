@@ -10,8 +10,9 @@ import java.util.Vector;
 
 public class Drawing extends GameApplet {
 
-	Sarah s = new Sarah(0, 475);
-	Sound jumpSound;
+	//Sarah s = new Sarah(0, 475);
+	Sarah s;
+	Sound jumpSound,shootSound;
 	// Monsters m = new Monsters(2000,475);
 	Monsters[] monsters = new Monsters[1000];
 	public int counter = 0;
@@ -33,8 +34,9 @@ public class Drawing extends GameApplet {
 
 	@Override
 	public void initialize() {
+		s = new Sarah(0, 475);
 		shoot = new Vector<Bullet>();
-		int last_loc = 0;
+		int last_loc = 100;
 		for (int i = 0; i < obs.length; i++) {
 			int pos = last_loc + rand.nextInt(1024);
 			obs[i] = new Obstacles(pos, 475, rand.nextInt(3));
@@ -46,6 +48,7 @@ public class Drawing extends GameApplet {
 			j += rand.nextInt((1000 - 500) + 1) + 500;
 		}
 		jumpSound = new Sound("sounds/s.jump.wav");
+		shootSound = new Sound("sounds/gunShot.wav");
 	}
 
 	@Override
@@ -53,7 +56,13 @@ public class Drawing extends GameApplet {
 		s.respondToInput(input);
 		if (input[SP]) {
 			s.shoot(shoot);
+			shootSound.play();
 		}
+//		if (input[_R]){
+//			this.initialize();
+//			paused = false;
+//			
+//		}
 
 	}
 
@@ -96,6 +105,7 @@ public class Drawing extends GameApplet {
 			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())) {
 				s.Sarah_Health = 0;
 				s.die();
+				paused=true;//pauses game loop
 			}
 		}
 		// Sarah's Collision with monster
@@ -104,6 +114,7 @@ public class Drawing extends GameApplet {
 				if (s.hasCollidedWith(monsters[i])) {// && m.isAlive == true
 					s.Sarah_Health = 0;
 					s.die();
+					paused=true;//pauses game loop
 				}
 			}
 		}
@@ -169,6 +180,8 @@ public class Drawing extends GameApplet {
 		g.setColor(Color.RED);
 		g.drawString("HP: " + s.getHealth(), 5, 15);
 		g.drawString("Score: " + s.getScore(), 5, 30);
+		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 100));
+
 		for (int i = 0; i < shoot.size(); i++) {
 			shoot.get(i).draw(g);
 		}
@@ -181,7 +194,11 @@ public class Drawing extends GameApplet {
 				monsters[j].draw(g);
 			}
 		}
-
+		
+		if(s.Sarah_Health==0){
+			g.drawString("Game Over", 350, 400);
+			//paused = true;
+		}
 		// g.drawImage(image, 100, 100, null);
 	}
 
