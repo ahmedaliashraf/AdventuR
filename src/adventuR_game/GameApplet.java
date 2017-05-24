@@ -191,6 +191,11 @@ public abstract class GameApplet extends Applet implements KeyListener, Runnable
 
 		if (code == _Q)
 			finished = true;
+		if (code == _R){
+			this.initialize();
+			paused = false;
+			
+		}
 
 		input[code] = true;
 	}
