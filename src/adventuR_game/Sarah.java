@@ -1,8 +1,11 @@
 package adventuR_game;
 
+import java.time.Instant;
 import java.util.Vector;
 
 public class Sarah extends Sprite {
+	Long storedTime;
+	
 	public static final int RUN = 1;
 	public static final int JUMP = 2;
 	public static final int SLIDE = 3;
@@ -107,11 +110,12 @@ public class Sarah extends Sprite {
 	}
 
 	public void shoot(Vector<Bullet> bullets) {
-		action = SHOOT;
-
-		bullets.add(new Bullet(x + 71, y + 30));
-		// System.out.println(y);
-		// moving = true;
+		//storedTime = System.currentTimeMillis();
+		//if (System.currentTimeMillis()-storedTime >= 200){
+			action = SHOOT;
+			bullets.add(new Bullet(x + 71, y + 30));
+		//	storedTime = System.currentTimeMillis();
+		//}
 	}
 
 	public void melee() {
