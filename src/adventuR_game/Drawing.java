@@ -105,7 +105,7 @@ public class Drawing extends GameApplet {
 			if (s.hasCollidedWith(obs[i].ObstaclesgetBounds())) {
 				s.Sarah_Health = 0;
 				s.die();
-				paused=true;//pauses game loop
+				//paused=true;//pauses game loop
 			}
 		}
 		// Sarah's Collision with monster
@@ -114,7 +114,7 @@ public class Drawing extends GameApplet {
 				if (s.hasCollidedWith(monsters[i])) {// && m.isAlive == true
 					s.Sarah_Health = 0;
 					s.die();
-					paused=true;//pauses game loop
+					//paused=true;//pauses game loop
 				}
 			}
 		}
